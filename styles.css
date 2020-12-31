@@ -1,0 +1,100 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@700&display=swap');
+
+* {
+    font-family: 'Open Sans Condensed', sans-serif;
+}
+
+h1 {
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+p {
+    margin: 0;
+}
+
+#entrada {
+    margin-left: 540px;
+    height: 22px;
+    padding: 5px;
+    font-size: 17px;
+    border: 2px solid black;
+    border-radius: 5px;
+    border-right: none;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    float: left;
+    width: 200px;
+}
+
+#botao img {
+    display: block;
+    height: 28px;  
+    width: 28px;
+}
+
+#botao {
+    float: left;
+    width: 40px;
+    height: 36px;
+    width: 55px;
+    padding: 5px;
+    border-radius: 5px;
+    border: 2px solid black;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    background: #324960;
+    color: white;
+    font-size: 17px;
+    border-left: none;
+    cursor: pointer;
+}
+
+input, label {
+    display: block;
+}
+
+label {
+    margin-left: 570px;
+}
+
+.container {
+    padding-bottom: 80px;
+}
+
+.table-wrapper{
+    margin: 10px 70px 70px;
+    box-shadow: 0px 35px 50px rgba( 0, 0, 0, 0.2 );
+}
+
+.fl-table {
+    border-radius: 5px;
+    font-size: 20px;
+    font-weight: normal;
+    border: none;
+    border-collapse: collapse;
+    width: 100%;
+    max-width: 100%;
+    white-space: nowrap;
+    background-color: white;
+}
+
+.fl-table td, .fl-table th {
+    text-align: center;
+    padding: 8px;
+}
+
+.fl-table td {
+    border-right: 1px solid #f8f8f8;
+    font-size: 20px;
+}
+
+.fl-table thead th {
+    color: #ffffff;
+    background: #324960;
+}
+
+.fl-table thead th:nth-child(even) {
+    color: #ffffff;
+    background: #324960;
+}
