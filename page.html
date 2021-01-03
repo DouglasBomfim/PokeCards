@@ -8,11 +8,13 @@
 </head>
 <body>
     <div class="container">
-        <h1>Tabela de Pokémons</h1>
-        <input type="text" placeholder="Procure por um pokémon" id="entrada">
-        <input type="button" id="botao" value="Search" onclick="search_pokemon()">
+        <h1>Table of pokémons</h1>
+        <input type="text" placeholder="Search for a pokémon" id="input_data">
+        <input type="button" id="search_button" value="Search" onclick="search_pokemon()">
+        <input type="button" id="random_button" value="Generate a random pokemon" onclick="random_pokemon()">
     </div>
     <div class="table-wrapper">
+        <div id="table-scroll">
         <table class="fl-table">
             <thead>
                 <tr>
@@ -25,10 +27,17 @@
                     <th>Image</th>
                 </tr>
             </thead>
-            <tbody id="corpo">
+            <tbody id="table_body">
             </tbody>
         </table>
+        </div>
     </div>
-	<script src="script.js"></script>
+    <script src="jquery.js"></script>
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded",function(){
+            load_content();
+        });
+    </script>
 </body>
 </html>

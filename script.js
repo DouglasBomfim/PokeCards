@@ -1,4 +1,4 @@
-var table_body = document.querySelector('#corpo');
+var table_body = document.querySelector('#table_body');
 
 const get_stats = (response) => {
     let html = '<ul>';
@@ -50,7 +50,8 @@ var options = { method: 'GET',
                cache: 'default' 
             };
 
-fetch('https://pokeapi.co/api/v2/pokemon/?limit=20', options)
+function load_content() {
+    fetch('https://pokeapi.co/api/v2/pokemon/?limit=30', options)
     .then(response => {response.json()
         .then(data => data.results.forEach(data => fetch(data.url, options)
             .then(response => {
@@ -58,13 +59,24 @@ fetch('https://pokeapi.co/api/v2/pokemon/?limit=20', options)
             })
         ))
     });
+}
 
-function search_pokemon() {
-    let search = document.querySelector("#entrada");
-    table_body.innerHTML = "";
-    fetch(`https://pokeapi.co/api/v2/pokemon/${search.value.toLowerCase()}`, options)
+function directed_request(field) {
+    fetch(`https://pokeapi.co/api/v2/pokemon/${field}`, options)
         .then(response => {response.json()
             .then(data => populate(data))
     });
+}
+
+function search_pokemon() {
+    let search = document.querySelector("#input_data");
+    table_body.innerHTML = "";
+    directed_request(search.value.toLowerCase());
     search.value = '';
+}
+
+function random_pokemon() {
+    table_body.innerHTML = "";
+    let random_number = Math.floor(Math.random() * 898) + 1;
+    directed_request(random_number);
 }

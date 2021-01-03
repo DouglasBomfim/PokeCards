@@ -4,6 +4,12 @@
     font-family: 'Open Sans Condensed', sans-serif;
 }
 
+#table-scroll {
+    max-height:900px;
+    overflow:auto;  
+    margin-top:20px;
+}
+
 h1 {
     text-align: center;
     padding-bottom: 20px;
@@ -13,8 +19,8 @@ p {
     margin: 0;
 }
 
-#entrada {
-    margin-left: 540px;
+#input_data {
+    margin-left: 410px;
     height: 22px;
     padding: 5px;
     font-size: 17px;
@@ -27,13 +33,7 @@ p {
     width: 200px;
 }
 
-#botao img {
-    display: block;
-    height: 28px;  
-    width: 28px;
-}
-
-#botao {
+#search_button {
     float: left;
     width: 40px;
     height: 36px;
@@ -47,6 +47,21 @@ p {
     color: white;
     font-size: 17px;
     border-left: none;
+    cursor: pointer;
+}
+
+#random_button {
+    float: left;
+    margin-left: 20px;
+    width: 40px;
+    height: 36px;
+    width: 210px;
+    padding: 5px;
+    border-radius: 5px;
+    border: 2px solid black;
+    background: #324960;
+    color: white;
+    font-size: 17px;
     cursor: pointer;
 }
 
