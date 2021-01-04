@@ -1,33 +1,17 @@
 var table_body = document.querySelector('#table_body');
 
 const get_stats = (response) => {
-    let html = '<ul>';
-    for(i in response.stats){
-        html += `<p>${response.stats[i].stat.name.toUpperCase()}: ${response.stats[i].base_stat}</p>`
-    }
-    html += "</ul>";
+    let html = (`<ul>${response.stats.map(element => `<p>${element.stat.name.toUpperCase()}: ${element.base_stat}</p>`)}</ul>`).replace(/,/g,"");
     return html;
 };
 
 const get_abilities = (response) => {
-    let html = '';
-    for(i in response.abilities){
-        if(i == response.abilities.length - 1)
-            html += response.abilities[i].ability.name;
-        else
-            html += `${response.abilities[i].ability.name}, `;
-    }
+    let html = `${response.abilities.map(element => element.ability.name).join(", ")}`;
     return html;
 };
 
 const get_types = (response) => {
-    let html = '';
-    for(i in response.types){
-        if(i == response.types.length - 1)
-            html += response.types[i].type.name;
-        else
-            html += `${response.types[i].type.name}, `;
-    }
+    let html = `${response.types.map(element => element.type.name).join(", ")}`;
     return html;
 };
 
