@@ -21,10 +21,10 @@ const populate = (response) => {
     new_body += `<td>${response.name.toUpperCase()}</td>`;
     new_body += `<td>${(response.height)/10} m</td>`;
     new_body += `<td>${(response.weight)/10} kg</td>`;
-    new_body += `<td>${get_stats(response)}</td>`
+    new_body += `<td id="status">${get_stats(response)}</td>`
     new_body += `<td>${get_abilities(response).toUpperCase()}</td>`;
     new_body += `<td>${get_types(response).toUpperCase()}</td>`;
-    new_body += `<td><img src="${response.sprites.front_default}"></td>`
+    new_body += `<td><img src="${response.sprites.other["official-artwork"].front_default != null ? response.sprites.other["official-artwork"].front_default : response.sprites.other.dream_world.front_default}"></td>`
     new_body += `</tr>`;
     table_body.innerHTML += new_body;
 };
