@@ -1,32 +1,65 @@
-var table_body = document.querySelector('#table_body');
+var table_body = document.querySelector('#cards');
+var current_pokemon_id;
 
 const get_stats = (response) => {
-    let html = (`<ul>${response.stats.map(element => `<p>${element.stat.name.toUpperCase()}: ${element.base_stat}</p>`)}</ul>`).replace(/,/g,"");
-    return html;
+    return (`${response.stats.map(element => `<tr><th>${element.stat.name.toUpperCase()}</th>
+        <td>${element.base_stat}</td></tr>`)}`).replace(/,/g,"");
 };
 
 const get_abilities = (response) => {
-    let html = `${response.abilities.map(element => element.ability.name).join(", ")}`;
-    return html;
+    return `${response.abilities.map(element => element.ability.name).join(", ")}`;
 };
 
 const get_types = (response) => {
-    let html = `${response.types.map(element => element.type.name).join(", ")}`;
-    return html;
+    return (`${response.types.map(element => `<h3 class="card__type card__type__${element.type.name}">
+        ${element.type.name.toUpperCase()}</h3>`)}`).replace(/,/g,"");
 };
 
-const populate = (response) => {
-    let new_body = "";
-    new_body += "<tr>";
-    new_body += `<td>${response.name.toUpperCase()}</td>`;
-    new_body += `<td>${(response.height)/10} m</td>`;
-    new_body += `<td>${(response.weight)/10} kg</td>`;
-    new_body += `<td id="status">${get_stats(response)}</td>`
-    new_body += `<td>${get_abilities(response).toUpperCase()}</td>`;
-    new_body += `<td>${get_types(response).toUpperCase()}</td>`;
-    new_body += `<td><img src="${response.sprites.other["official-artwork"].front_default != null ? response.sprites.other["official-artwork"].front_default : response.sprites.other.dream_world.front_default}"></td>`
-    new_body += `</tr>`;
-    table_body.innerHTML += new_body;
+const populate = (response, type) => {
+    const sprite = response.sprites.other;
+    let new_body = `<figure class="card card--${response.types[0].type.name}">
+                        <div class="card__image-container">
+                            <img src="${sprite["official-artwork"].front_default != null ? 
+                                sprite["official-artwork"].front_default : 
+                                sprite.dream_world.front_default}" 
+                                alt="${response.name.toUpperCase()}" class="card__image">
+                        </div>
+                        <figcaption class="card__caption">
+                            <h1 class="card__name">${response.name.toUpperCase()} - Nº${response.id}</h1>
+                            <div class="card__types">
+                                ${get_types(response)}
+                            </div>
+                            <table class="card__stats">
+                                <tbody>${get_stats(response)}</tbody>
+                                <div class="card__abilities">
+                                    <h4 class="card__ability">
+                                        <span class="card__label">Abilities</span>
+                                        ${get_abilities(response).toUpperCase()}
+                                    </h4>
+                                </div>
+                            </table>
+                        </figcaption>
+                    </figure>`;
+    if(type === 'list')
+        table_body.innerHTML += new_body;
+    else {
+        if(current_pokemon_id == 1) {
+            table_body.innerHTML += `${new_body}<input type="button" id="card_button"
+             value="Next pokemon" onclick="directed_request(current_pokemon_id + 1)">`;
+        }
+        else{
+            if(current_pokemon_id == 898) {
+                table_body.innerHTML += `<input type="button" id="card_button"
+                 value="Previous pokemon" onclick="directed_request(current_pokemon_id - 1)">${new_body}`
+            }
+            else {
+                table_body.innerHTML += `<input type="button" id="card_button"
+                 value="Previous pokemon" onclick="directed_request(current_pokemon_id - 1)">${new_body}
+                 <input type="button" id="card_button" value="Next pokemon"
+                  onclick="directed_request(current_pokemon_id + 1)">`;
+            }
+        }
+    }
 };
 
 var options = { method: 'GET',
@@ -39,28 +72,28 @@ function load_content() {
     .then(response => {response.json()
         .then(data => data.results.forEach(data => fetch(data.url, options)
             .then(response => {
-                response.json().then(data => populate(data))
+                response.json().then(data => populate(data, 'list'))
             })
         ))
     });
 }
 
 function directed_request(field) {
+    table_body.innerHTML = "";
     fetch(`https://pokeapi.co/api/v2/pokemon/${field}`, options)
         .then(response => {response.json()
-            .then(data => populate(data))
+            .then(data => {current_pokemon_id = data.id;
+                           populate(data, 'directed');})
     });
 }
 
 function search_pokemon() {
     let search = document.querySelector("#input_data");
-    table_body.innerHTML = "";
     directed_request(search.value.toLowerCase());
     search.value = '';
 }
 
 function random_pokemon() {
-    table_body.innerHTML = "";
     let random_number = Math.floor(Math.random() * 898) + 1;
     directed_request(random_number);
 }

@@ -5,75 +5,13 @@
 }
 
 .container {
-    padding-bottom: 80px;
-}
-
-.table-wrapper{
-    margin: 10px 70px 70px;
-    box-shadow: 0px 35px 50px rgba( 0, 0, 0, 0.2 );
-}
-
-.fl-table {
-    border-radius: 5px;
-    font-size: 20px;
-    font-weight: normal;
-    border: none;
-    border-collapse: collapse;
-    width: 100%;
-    max-width: 100%;
-    white-space: nowrap;
-    background-color: white;
-}
-
-.fl-table td, .fl-table th {
-    text-align: center;
-    padding: 8px;
-}
-
-.fl-table td {
-    border-right: 1px solid #f8f8f8;
-    font-size: 20px;
-}
-
-.fl-table thead th {
-    color: #ffffff;
-    background: #324960;
-}
-
-.fl-table thead th:nth-child(even) {
-    color: #ffffff;
-    background: #324960;
-}
-
-img {
-    width: 150px;
-}
-
-h1 {
-    text-align: center;
-    padding-bottom: 20px;
-}
-
-p {
-    margin: 0;
-}
-
-input, label {
-    display: block;
-}
-
-label {
-    margin-left: 570px;
-}
-
-#table-scroll {
-    max-height:900px;
-    overflow:auto;  
-    margin-top:20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 #input_data {
-    margin-left: 410px;
+    margin-left: 30%;
     height: 22px;
     padding: 5px;
     font-size: 17px;
@@ -84,6 +22,7 @@ label {
     border-bottom-right-radius: 0;
     float: left;
     width: 200px;
+    outline: none;
 }
 
 #search_button {
@@ -101,11 +40,12 @@ label {
     font-size: 17px;
     border-left: none;
     cursor: pointer;
+    outline: none;
 }
 
 #random_button {
     float: left;
-    margin-left: 20px;
+    margin-left: 2%;
     width: 40px;
     height: 36px;
     width: 210px;
@@ -116,8 +56,295 @@ label {
     color: white;
     font-size: 17px;
     cursor: pointer;
+    outline: none;
 }
 
-#status {
-    text-align: justify;
+#card_button {
+    width: 40px;
+    height: 36px;
+    width: 210px;
+    padding: 5px;
+    border-radius: 5px;
+    border: 2px solid black;
+    background: #324960;
+    color: white;
+    font-size: 17px;
+    cursor: pointer;
+    outline: none;
+}
+
+body {
+    text-align: center;
+    margin: 20px;
+}
+
+img {
+    max-height: 150px;
+    margin: auto;
+    display: inline-block;
+}
+
+h1, h2, h3, h4, h5 {
+    margin: 0;
+    font-weight: 400;
+}
+
+.card {
+    display: inline-block;
+    width: 300px;
+    padding: 1em;
+    border-radius: 15px;
+    margin: 10px;
+    text-align: left;
+    box-shadow: 0px 5px 20px -10px #111;
+    position: relative;
+    transition: 0.4s;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    transition: 0.4s ease-out;
+}
+
+.card:hover ~ .card {
+    position: relative;
+    left: 2px;
+    transition: 0.4s ease-out;
+}
+
+.card__caption {
+    background-color: #ffffffa6;
+    padding: 1em;
+    position: relative;
+    border-radius: 0 0 3px 3px;
+}
+
+.card__image-container {
+    background-color: #000000b3;
+    text-align: center;
+    padding: 1em 1em 0;
+    border-radius: 3px 3px 0 0;
+    overflow: hidden;
+}
+
+.card__image-container img {
+    -webkit-transition: -webkit-transform .5s ease;
+    transition: transform .5s ease;
+ }
+ 
+ .card__image-container:hover img {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+ }
+
+.card__types {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card__type {
+    display: inline-block;
+    position: relative;
+    margin-left: 5px;
+    top: 0;
+    right: 0;
+    color: #fff;
+    text-shadow: 2px 2px black;
+    letter-spacing: 0.1em;
+    padding: 0.25em;
+    line-height: 1;
+    border-radius: 2px;
+    background: #bbb;
+}
+
+.card__label {
+    font-size: 15px;
+    text-transform: uppercase;
+    font-weight: 400;
+    display: block;
+    margin-bottom: 3px;
+}
+
+.card__name {
+    text-align: center;
+    font-size: 1.5em;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    padding-bottom: 10px;
+}
+
+.card__stats {
+    margin: 1em 0;
+    width: 100%;
+}
+
+.card__stats th {
+    text-align: right;
+    font-weight: 300;
+}
+
+.card__stats th, .card__stats td {
+    width: 50%;
+    padding: 0.25em 0.5em 0;
+}
+
+.card__abilities {
+    display: flex;
+    justify-content: space-between;
+}
+
+.card__ability {
+    margin-top: 1em;
+    text-align: center;
+    flex: 1 0;
+}
+
+.card--bug {
+    background: linear-gradient(120deg, #c1d324 0%, #a8b820 100%);
+    box-shadow: 0px 5px 20px -10px #a8b820;
+}
+
+.card__type__bug {
+    background-color: #a8b820;
+}
+
+.card--dark {
+    background: linear-gradient(120deg, #9e7d66 0%, #705848 100%);
+    box-shadow: 0px 5px 20px -10px #705848;
+}
+
+.card__type__dark {
+    background-color: #705848;
+}
+
+.card--dragon {
+    background: linear-gradient(120deg, #7c47f8 0%, #7038f8 100%);
+    box-shadow: 0px 5px 20px -10px #7038f8;
+}
+
+.card__type__dragon {
+    background-color: #7038f8;
+}
+
+.card--electric {
+    background: linear-gradient(90deg, #f8d341 34%, #f8d030 83%);
+}
+
+.card__type__electric {
+    background-color: #f8d030;
+}
+
+.card--fairy {
+    background: linear-gradient(45deg, #ffe6f0 0%, #ffc5e0 34%, #ffa6b9 71%, #ff8a95 100%);
+}
+
+.card__type__fairy {
+    background: #ee99ac;
+}
+
+.card--fighting {
+    background: linear-gradient(90deg, #ee3a31 34%, #c03028 100%);
+}
+
+.card__type__fighting {
+    background-color: #c03028;
+}
+
+.card--fire {
+    background: linear-gradient(0deg, rgb(241, 91, 4) 10%, #f08030 100%);
+}
+
+.card__type__fire {
+    background-color: #f08030;
+}
+
+.card--flying {
+    background: linear-gradient(0deg, #8c77c9 10%, #a890f0 100%);
+}
+
+.card__type__flying {
+    background-color: #a890f0;
+}
+
+.card--ghost {
+    background: linear-gradient(0deg, #9a78d1 10%, #705898 100%);
+}
+
+.card__type__ghost {
+    background-color: #705898;
+}
+
+.card--grass {
+    background: linear-gradient(140deg, #95f864 0%, #87e05a 69%, #78c850 100%);
+}
+
+.card__type__grass {
+    background: #78c850;
+}
+
+.card--ground {
+    background: linear-gradient(140deg, #fad674 0%, #ebc96d 69%, #e0c068 100%);
+}
+
+.card__type__ground {
+    background: #e0c068;
+}
+
+.card--ice {
+    background: linear-gradient(230deg, #caeaf6 0%, #a0eaf1 46%, #6fb8eb 100%);
+}
+
+.card__type__ice {
+    background: #98d8d8;
+}
+
+.card--normal {
+    background: linear-gradient(110deg, #dfdfa0 0%, #a8a878 100%);
+    box-shadow: 0px 5px 20px -10px #3a1c71;
+}
+
+.card__type__normal {
+    background-color: #a8a878;
+}
+
+.card--poison {
+    background: linear-gradient(230deg, #e05ae0 0%, #c950c9 46%, #a040a0 100%);
+}
+
+.card__type__poison {
+    background: #a040a0;
+}
+
+.card--psychic {
+    background: linear-gradient(140deg, #fa6894 0%, #f86390 39%, #f85888 100%);
+}
+
+.card__type__psychic {
+    background: #f85888;
+}
+
+.card--rock {
+    background: linear-gradient(140deg, #ffdf4e 0%, #dbbf42 39%, #b8a038 100%);
+}
+
+.card__type__rock {
+    background: #b8a038;
+}
+
+.card--steel {
+    background: linear-gradient(140deg, #c4c4cf 0%, #c0c0cf 39%, #b8b8d0 100%);
+}
+
+.card__type__steel {
+    background: #b8b8d0;
+}
+
+.card--water {
+    background: linear-gradient(120deg, #6890f0 0%, #5f83da 100%);
+    box-shadow: 0px 5px 20px -10px #5f83da;
+}
+
+.card__type__water {
+    background-color: #6890f0;
 }

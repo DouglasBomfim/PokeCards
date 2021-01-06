@@ -3,34 +3,17 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Pokemon Table</title>
+	<title>PokeCards</title>
 	<link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
-        <h1>Table of pokémons</h1>
+        <h1>PokeCards</h1>
         <input type="text" placeholder="Search for a pokémon" id="input_data">
         <input type="button" id="search_button" value="Search" onclick="search_pokemon()">
         <input type="button" id="random_button" value="Generate a random pokemon" onclick="random_pokemon()">
     </div>
-    <div class="table-wrapper">
-        <div id="table-scroll">
-        <table class="fl-table">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Height</th>
-                    <th>Weight</th>
-                    <th>Stats</th>
-                    <th>Abilities</th>
-                    <th>Type</th>
-                    <th>Image</th>
-                </tr>
-            </thead>
-            <tbody id="table_body">
-            </tbody>
-        </table>
-        </div>
+    <div id="cards">
     </div>
     <script src="script.js"></script>
     <script>
