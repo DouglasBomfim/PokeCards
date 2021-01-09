@@ -27,6 +27,7 @@
 
 #search_button {
     float: left;
+    margin-right: 2%;
     width: 40px;
     height: 36px;
     width: 55px;
@@ -44,22 +45,6 @@
 }
 
 #random_button {
-    float: left;
-    margin-left: 2%;
-    width: 40px;
-    height: 36px;
-    width: 210px;
-    padding: 5px;
-    border-radius: 5px;
-    border: 2px solid black;
-    background: #324960;
-    color: white;
-    font-size: 17px;
-    cursor: pointer;
-    outline: none;
-}
-
-#card_button {
     width: 40px;
     height: 36px;
     width: 210px;
@@ -189,12 +174,12 @@ h1, h2, h3, h4, h5 {
     padding: 0.25em 0.5em 0;
 }
 
-.card__abilities {
+.card__box {
     display: flex;
     justify-content: space-between;
 }
 
-.card__ability {
+.card__block {
     margin-top: 1em;
     text-align: center;
     flex: 1 0;
