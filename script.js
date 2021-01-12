@@ -1,7 +1,8 @@
-var table_body = document.querySelector('#cards');
-var current_pokemon_id;
+let cards_body = document.querySelector('#cards');
+let current_pokemon_id;
+const MAX_POKEMONS = 898;
 
-var options = { method: 'GET',
+let options = { method: 'GET',
                mode: 'cors',
                cache: 'default' 
             };
@@ -37,7 +38,7 @@ async function get_chain(response) {
 
 const get_evolution = (response, name) => {
     let evolution = [];
-    if(response.chain.evolves_to.length !== 0){
+    if(response.chain.evolves_to.length !== 0) {
         response.chain.evolves_to.forEach(
           element1 => { if(response.chain.species.name === name) {
                             evolution.push(element1.species.name)};
@@ -86,23 +87,22 @@ async function populate(response, type) {
                         </figcaption>
                     </figure>`;
     if(type === 'list')
-        table_body.innerHTML += new_body;
+        cards_body.innerHTML += new_body;
     else {
-        if(current_pokemon_id == 1) {
-            table_body.innerHTML += `${new_body}<input type="button" id="random_button"
-             value="Next pokemon" onclick="directed_request(current_pokemon_id + 1)">`;
-        }
-        else{
-            if(current_pokemon_id == 898) {
-                table_body.innerHTML += `<input type="button" id="random_button"
-                 value="Previous pokemon" onclick="directed_request(current_pokemon_id - 1)">${new_body}`
-            }
-            else {
-                table_body.innerHTML += `<input type="button" id="random_button"
-                 value="Previous pokemon" onclick="directed_request(current_pokemon_id - 1)">${new_body}
-                 <input type="button" id="random_button" value="Next pokemon"
-                  onclick="directed_request(current_pokemon_id + 1)">`;
-            }
+        switch(current_pokemon_id) {
+            case 1: 
+                cards_body.innerHTML = `${new_body}<input type="button" id="random_button"
+                value="Next pokemon" onclick="directed_request(current_pokemon_id + 1)">`;
+                break;
+            case MAX_POKEMONS: 
+                cards_body.innerHTML = `<input type="button" id="random_button"
+                value="Previous pokemon" onclick="directed_request(current_pokemon_id - 1)">${new_body}`;
+                break;
+            default: 
+                cards_body.innerHTML = `<input type="button" id="random_button"
+                value="Previous pokemon" onclick="directed_request(current_pokemon_id - 1)">${new_body}
+                <input type="button" id="random_button" value="Next pokemon"
+                onclick="directed_request(current_pokemon_id + 1)">`;
         }
     }
 }
@@ -119,10 +119,10 @@ function load_content() {
 }
 
 function directed_request(field) {
-    table_body.innerHTML = "";
+    cards_body.innerHTML = "";
     fetch(`https://pokeapi.co/api/v2/pokemon/${field}`, options)
         .then(response => { if(response.status == 404){
-            table_body.innerHTML = "<p>Pokemon Not Found!</p>";
+            cards_body.innerHTML = "<p>Pokemon Not Found!</p>";
         }else {response.json()
             .then(data => {current_pokemon_id = data.id;
                            populate(data, 'directed');})
@@ -136,6 +136,6 @@ function search_pokemon() {
 }
 
 function random_pokemon() {
-    let random_number = Math.floor(Math.random() * 898) + 1;
+    let random_number = Math.floor(Math.random() * MAX_POKEMONS) + 1;
     directed_request(random_number);
 }
