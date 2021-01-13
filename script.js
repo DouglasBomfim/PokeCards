@@ -1,8 +1,8 @@
-let cards_body = document.querySelector('#cards');
-let current_pokemon_id;
+const cards_body = document.querySelector('#cards');
 const MAX_POKEMONS = 898;
+let current_pokemon_id;
 
-let options = { method: 'GET',
+const options = { method: 'GET',
                mode: 'cors',
                cache: 'default' 
             };
@@ -24,15 +24,16 @@ const get_types = (response) => {
 async function get_chain(response) {
     let response_chain;
     await (fetch(response.species.url, options)
+        .then(data => data.json()
+            .then(data2 => fetch(data2.evolution_chain.url, options)
                 .then(data => data.json()
-                    .then(data2 => fetch(data2.evolution_chain.url, options)
-                        .then(data => data.json()
-                            .then(data3 => { 
-                                response_chain = get_evolution(data3, data2.name)
-                            })
-                        )
-                    )
-                ))
+                    .then(data3 => { 
+                        response_chain = get_evolution(data3, data2.name)
+                    })
+                )
+            )
+        )
+    )
     return response_chain;
 } 
 
@@ -40,14 +41,18 @@ const get_evolution = (response, name) => {
     let evolution = [];
     if(response.chain.evolves_to.length !== 0) {
         response.chain.evolves_to.forEach(
-          element1 => { if(response.chain.species.name === name) {
-                            evolution.push(element1.species.name)};
-                        element1.evolves_to.forEach(
-                            element2 => { if(element1.species.name === name) {
-                                            evolution.push(element2.species.name)};
-                            }
-                        );
-                    }
+          first_level => { 
+            if(response.chain.species.name === name) {
+                evolution.push(first_level.species.name)
+            };
+            first_level.evolves_to.forEach(
+                second_level => { 
+                    if(first_level.species.name === name) {
+                        evolution.push(second_level.species.name)
+                    };
+                }
+            );
+            }
         )
     }
     if(evolution.length == 0)
@@ -56,9 +61,8 @@ const get_evolution = (response, name) => {
         return `${evolution.join(", ")}`;
 };
 
-async function populate(response, type) {
+const create_html = (response, evolution, type) => {
     const sprite = response.sprites.other;
-    let response_evolution = await get_chain(response);
     let new_body = `<figure class="card card--${response.types[0].type.name}">
                         <div class="card__image-container">
                             <img src="${sprite["official-artwork"].front_default != null ? 
@@ -78,7 +82,7 @@ async function populate(response, type) {
                                 </h4>
                                 <h4 class="card__block">
                                    <span class="card__label">Evolve To</span>
-                                    ${response_evolution.toUpperCase()}
+                                    ${evolution.toUpperCase()}
                                 </h4>
                             </div>
                             <table class="card__stats">
@@ -91,20 +95,25 @@ async function populate(response, type) {
     else {
         switch(current_pokemon_id) {
             case 1: 
-                cards_body.innerHTML = `${new_body}<input type="button" id="random_button"
+                cards_body.innerHTML = `${new_body}<input type="button" class="random__button"
                 value="Next pokemon" onclick="directed_request(current_pokemon_id + 1)">`;
                 break;
             case MAX_POKEMONS: 
-                cards_body.innerHTML = `<input type="button" id="random_button"
+                cards_body.innerHTML = `<input type="button" class="random__button"
                 value="Previous pokemon" onclick="directed_request(current_pokemon_id - 1)">${new_body}`;
                 break;
             default: 
-                cards_body.innerHTML = `<input type="button" id="random_button"
+                cards_body.innerHTML = `<input type="button" class="random__button"
                 value="Previous pokemon" onclick="directed_request(current_pokemon_id - 1)">${new_body}
-                <input type="button" id="random_button" value="Next pokemon"
+                <input type="button" class="random__button" value="Next pokemon"
                 onclick="directed_request(current_pokemon_id + 1)">`;
         }
     }
+};
+
+async function populate(response, type) {
+    let response_evolution = await get_chain(response);
+    create_html(response, response_evolution, type);
 }
 
 function load_content() {
