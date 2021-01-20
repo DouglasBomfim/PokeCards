@@ -12,41 +12,41 @@
 
 #input_data {
     margin-left: 30%;
-    height: 22px;
+    border-radius: 43px;
+    border-style: solid;
+    border-width: 2px;
+    text-align: center;
+    width: 180px;
+    font-size: 18px;
     padding: 5px;
-    font-size: 17px;
-    border: 2px solid black;
-    border-radius: 5px;
-    border-right: none;
+    border-color: #000000;
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
-    float: left;
-    width: 200px;
     outline: none;
 }
 
 #search_button {
     float: left;
     margin-right: 2%;
-    width: 40px;
-    height: 36px;
-    width: 55px;
+    height: 38px;
+    width: 70px;
     padding: 5px;
-    border-radius: 5px;
+    border-radius: 43px;
     border: 2px solid black;
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
     background: #324960;
     color: white;
-    font-size: 17px;
+    font-size: 18px;
     border-left: none;
-    cursor: pointer;
     outline: none;
 }
 
 body {
     text-align: center;
-    margin: 20px;
+    width: 1080px;
+    margin: auto;
+    margin-top: 20px;
 }
 
 img {
@@ -60,7 +60,7 @@ h1, h2, h3, h4, h5 {
     font-weight: 400;
 }
 
-.random__button {
+input[type=button] {
     width: 40px;
     height: 36px;
     width: 210px;
@@ -117,10 +117,10 @@ h1, h2, h3, h4, h5 {
     transition: transform .5s ease;
  }
  
- .card__image-container:hover img {
+.card__image-container:hover img {
     -webkit-transform: scale(1.1);
     transform: scale(1.1);
- }
+}
 
 .card__types {
     display: flex;

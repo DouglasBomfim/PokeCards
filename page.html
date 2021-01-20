@@ -4,17 +4,17 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>PokeCards</title>
-	<link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
         <h1>PokeCards</h1>
         <input type="text" placeholder="Search for a pokémon" id="input_data">
         <input type="button" id="search_button" value="Search" onclick="search_pokemon()">
-        <input type="button" class="random__button" value="Generate a random pokemon" onclick="random_pokemon()">
+        <input type="button" value="Generate a random pokemon" onclick="random_pokemon()">
     </div>
-    <div id="cards">
-    </div>
+    <div id="cards"></div>
+    <div class="container" id="view_more"></div>
     <script src="script.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded",function(){

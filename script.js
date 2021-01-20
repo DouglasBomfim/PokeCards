@@ -1,6 +1,8 @@
 const cards_body = document.querySelector('#cards');
+const view_more = document.querySelector('#view_more');
 const MAX_POKEMONS = 898;
 let current_pokemon_id;
+let offset = 0;
 
 const options = { method: 'GET',
                mode: 'cors',
@@ -22,23 +24,21 @@ const get_types = (response) => {
 };
 
 async function get_chain(response) {
-    let response_chain;
-    await (fetch(response.species.url, options)
+    return await (fetch(response.species.url, options)
         .then(data => data.json()
             .then(data2 => fetch(data2.evolution_chain.url, options)
                 .then(data => data.json()
                     .then(data3 => { 
-                        response_chain = get_evolution(data3, data2.name)
+                        return get_evolution(data3, data2.name)
                     })
                 )
             )
         )
     )
-    return response_chain;
 } 
 
 const get_evolution = (response, name) => {
-    let evolution = [];
+    const evolution = [];
     if(response.chain.evolves_to.length !== 0) {
         response.chain.evolves_to.forEach(
           first_level => { 
@@ -55,15 +55,12 @@ const get_evolution = (response, name) => {
             }
         )
     }
-    if(evolution.length == 0)
-        return "NONE";
-    else
-        return `${evolution.join(", ")}`;
+    return evolution.length == 0 ? "NONE" : `${evolution.join(", ")}`;
 };
 
 const create_html = (response, evolution, type) => {
     const sprite = response.sprites.other;
-    let new_body = `<figure class="card card--${response.types[0].type.name}">
+    const new_body = `<figure class="card card--${response.types[0].type.name}">
                         <div class="card__image-container">
                             <img src="${sprite["official-artwork"].front_default != null ? 
                                 sprite["official-artwork"].front_default : 
@@ -95,29 +92,29 @@ const create_html = (response, evolution, type) => {
     else {
         switch(current_pokemon_id) {
             case 1: 
-                cards_body.innerHTML = `${new_body}<input type="button" class="random__button"
+                cards_body.innerHTML = `${new_body}<input type="button"
                 value="Next pokemon" onclick="directed_request(current_pokemon_id + 1)">`;
                 break;
             case MAX_POKEMONS: 
-                cards_body.innerHTML = `<input type="button" class="random__button"
+                cards_body.innerHTML = `<input type="button"
                 value="Previous pokemon" onclick="directed_request(current_pokemon_id - 1)">${new_body}`;
                 break;
             default: 
-                cards_body.innerHTML = `<input type="button" class="random__button"
+                cards_body.innerHTML = `<input type="button"
                 value="Previous pokemon" onclick="directed_request(current_pokemon_id - 1)">${new_body}
-                <input type="button" class="random__button" value="Next pokemon"
+                <input type="button" value="Next pokemon"
                 onclick="directed_request(current_pokemon_id + 1)">`;
         }
     }
 };
 
 async function populate(response, type) {
-    let response_evolution = await get_chain(response);
+    const response_evolution = await get_chain(response);
     create_html(response, response_evolution, type);
 }
 
 function load_content() {
-    fetch('https://pokeapi.co/api/v2/pokemon/?limit=30', options)
+    fetch(`https://pokeapi.co/api/v2/pokemon/?offset=${offset}&amp;limit=3`, options)
     .then(response => {response.json()
         .then(data => data.results.forEach(data => fetch(data.url, options)
             .then(response => {
@@ -125,26 +122,37 @@ function load_content() {
             })
         ))
     });
+    offset += 3;
+    if(view_more.innerHTML == "")
+        view_more.innerHTML = `<input type="button" value="View More" onclick="load_content()">`;
 }
 
 function directed_request(field) {
+    offset = 0;
+    view_more.innerHTML = "";
     cards_body.innerHTML = "";
     fetch(`https://pokeapi.co/api/v2/pokemon/${field}`, options)
-        .then(response => { if(response.status == 404){
-            cards_body.innerHTML = "<p>Pokemon Not Found!</p>";
-        }else {response.json()
-            .then(data => {current_pokemon_id = data.id;
-                           populate(data, 'directed');})
-        }});
+        .then(response => { 
+            if(response.status == 404) {
+                cards_body.innerHTML = "<p>Pokemon Not Found!</p>";
+            } 
+            else {
+                response.json()
+                    .then(data => {
+                        current_pokemon_id = data.id;
+                        populate(data, 'directed');
+                    })
+            }
+        });
 }
 
 function search_pokemon() {
-    let search = document.querySelector("#input_data");
+    const search = document.querySelector("#input_data");
     directed_request(search.value.toLowerCase());
     search.value = '';
 }
 
 function random_pokemon() {
-    let random_number = Math.floor(Math.random() * MAX_POKEMONS) + 1;
+    const random_number = Math.floor(Math.random() * MAX_POKEMONS) + 1;
     directed_request(random_number);
 }
