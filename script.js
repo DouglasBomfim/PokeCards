@@ -4,14 +4,15 @@ const MAX_POKEMONS = 898;
 let current_pokemon_id;
 let offset = 0;
 
-const options = { method: 'GET',
-               mode: 'cors',
-               cache: 'default' 
-            };
+const options = {
+    method: 'GET',
+    mode: 'cors',
+    cache: 'default'
+};
 
 const get_stats = (response) => {
     return (`${response.stats.map(element => `<tr><th>${element.stat.name.toUpperCase()}</th>
-        <td>${element.base_stat}</td></tr>`)}`).replace(/,/g,"");
+        <td>${element.base_stat}</td></tr>`)}`).replace(/,/g, "");
 };
 
 const get_abilities = (response) => {
@@ -20,7 +21,7 @@ const get_abilities = (response) => {
 
 const get_types = (response) => {
     return (`${response.types.map(element => `<h3 class="card__type card__type__${element.type.name}">
-        ${element.type.name.toUpperCase()}</h3>`)}`).replace(/,/g,"");
+        ${element.type.name.toUpperCase()}</h3>`)}`).replace(/,/g, "");
 };
 
 async function get_chain(response) {
@@ -28,43 +29,61 @@ async function get_chain(response) {
         .then(data => data.json()
             .then(data2 => fetch(data2.evolution_chain.url, options)
                 .then(data => data.json()
-                    .then(data3 => { 
+                    .then(data3 => {
                         return get_evolution(data3, data2.name)
                     })
                 )
             )
         )
     )
-} 
+}
 
 const get_evolution = (response, name) => {
     const evolution = [];
-    if(response.chain.evolves_to.length !== 0) {
+    if (response.chain.evolves_to.length !== 0) {
         response.chain.evolves_to.forEach(
-          first_level => { 
-            if(response.chain.species.name === name) {
-                evolution.push(first_level.species.name)
-            };
-            first_level.evolves_to.forEach(
-                second_level => { 
-                    if(first_level.species.name === name) {
-                        evolution.push(second_level.species.name)
-                    };
-                }
-            );
+            first_level => {
+                if (response.chain.species.name === name) {
+                    evolution.push(first_level.species.name)
+                };
+                first_level.evolves_to.forEach(
+                    second_level => {
+                        if (first_level.species.name === name) {
+                            evolution.push(second_level.species.name)
+                        };
+                    }
+                );
             }
         )
     }
     return evolution.length == 0 ? "NONE" : `${evolution.join(", ")}`;
 };
 
+const generate_navigation = (body) => {
+    switch (current_pokemon_id) {
+        case 1:
+            cards_body.innerHTML = `${body}<input type="button"
+            value="Next pokemon" onclick="directed_request(current_pokemon_id + 1)">`;
+            break;
+        case MAX_POKEMONS:
+            cards_body.innerHTML = `<input type="button"
+            value="Previous pokemon" onclick="directed_request(current_pokemon_id - 1)">${body}`;
+            break;
+        default:
+            cards_body.innerHTML = `<input type="button"
+            value="Previous pokemon" onclick="directed_request(current_pokemon_id - 1)">${body}
+            <input type="button" value="Next pokemon"
+            onclick="directed_request(current_pokemon_id + 1)">`;
+    }
+}
+
 const create_html = (response, evolution, type) => {
     const sprite = response.sprites.other;
     const new_body = `<figure class="card card--${response.types[0].type.name}">
                         <div class="card__image-container">
-                            <img src="${sprite["official-artwork"].front_default != null ? 
-                                sprite["official-artwork"].front_default : 
-                                sprite.dream_world.front_default}" 
+                            <img src="${sprite["official-artwork"].front_default != null ?
+            sprite["official-artwork"].front_default :
+            sprite.dream_world.front_default}" 
                                 alt="${response.name.toUpperCase()}" class="card__image">
                         </div>
                         <figcaption class="card__caption">
@@ -87,24 +106,10 @@ const create_html = (response, evolution, type) => {
                             </table>
                         </figcaption>
                     </figure>`;
-    if(type === 'list')
+    if (type === 'list')
         cards_body.innerHTML += new_body;
     else {
-        switch(current_pokemon_id) {
-            case 1: 
-                cards_body.innerHTML = `${new_body}<input type="button"
-                value="Next pokemon" onclick="directed_request(current_pokemon_id + 1)">`;
-                break;
-            case MAX_POKEMONS: 
-                cards_body.innerHTML = `<input type="button"
-                value="Previous pokemon" onclick="directed_request(current_pokemon_id - 1)">${new_body}`;
-                break;
-            default: 
-                cards_body.innerHTML = `<input type="button"
-                value="Previous pokemon" onclick="directed_request(current_pokemon_id - 1)">${new_body}
-                <input type="button" value="Next pokemon"
-                onclick="directed_request(current_pokemon_id + 1)">`;
-        }
+        generate_navigation(new_body);
     }
 };
 
@@ -115,15 +120,16 @@ async function populate(response, type) {
 
 function load_content() {
     fetch(`https://pokeapi.co/api/v2/pokemon/?offset=${offset}&amp;limit=3`, options)
-    .then(response => {response.json()
-        .then(data => data.results.forEach(data => fetch(data.url, options)
-            .then(response => {
-                response.json().then(data => populate(data, 'list'))
-            })
-        ))
-    });
+        .then(response => {
+            response.json()
+            .then(data => data.results.forEach(data => fetch(data.url, options)
+                .then(response => {
+                    response.json().then(data => populate(data, 'list'))
+                })
+            ))
+        });
     offset += 3;
-    if(view_more.innerHTML == "")
+    if (view_more.innerHTML == "")
         view_more.innerHTML = `<input type="button" value="View More" onclick="load_content()">`;
 }
 
@@ -132,10 +138,10 @@ function directed_request(field) {
     view_more.innerHTML = "";
     cards_body.innerHTML = "";
     fetch(`https://pokeapi.co/api/v2/pokemon/${field}`, options)
-        .then(response => { 
-            if(response.status == 404) {
+        .then(response => {
+            if (response.status == 404) {
                 cards_body.innerHTML = "<p>Pokemon Not Found!</p>";
-            } 
+            }
             else {
                 response.json()
                     .then(data => {
