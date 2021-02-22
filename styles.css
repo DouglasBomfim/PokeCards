@@ -4,10 +4,26 @@
     font-family: 'Open Sans Condensed', sans-serif;
 }
 
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
 .container {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.spinner {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 150px;
+    border: 8px solid rgba(0, 0, 0, .1);
+    border-left-color: #324960;
+    height: 100px;
+    width: 100px;
+    border-radius: 60%;
+    animation: spin 1s linear infinite;
 }
 
 #input_data {

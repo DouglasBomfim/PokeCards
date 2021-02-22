@@ -1,5 +1,6 @@
 const cards_body = document.querySelector('#cards');
 const view_more = document.querySelector('#view_more');
+const spinner = document.querySelector('.spinner');
 const MAX_POKEMONS = 898;
 let current_pokemon_id;
 let offset = 0;
@@ -111,6 +112,7 @@ const create_html = (response, evolution, type) => {
     else {
         generate_navigation(new_body);
     }
+    spinner.hidden = true;
 };
 
 async function populate(response, type) {
@@ -134,12 +136,14 @@ function load_content() {
 }
 
 function directed_request(field) {
+    spinner.hidden = false;
     offset = 0;
     view_more.innerHTML = "";
     cards_body.innerHTML = "";
     fetch(`https://pokeapi.co/api/v2/pokemon/${field}`, options)
         .then(response => {
             if (response.status == 404) {
+                spinner.hidden = true;
                 cards_body.innerHTML = "<p>Pokemon Not Found!</p>";
             }
             else {
