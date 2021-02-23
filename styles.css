@@ -8,22 +8,9 @@
     to { transform: rotate(360deg); }
 }
 
-.container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.spinner {
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 150px;
-    border: 8px solid rgba(0, 0, 0, .1);
-    border-left-color: #324960;
-    height: 100px;
-    width: 100px;
-    border-radius: 60%;
-    animation: spin 1s linear infinite;
+#nav_h1 {
+    color: white;
+    text-shadow: 2px 2px black;
 }
 
 #input_data {
@@ -51,18 +38,23 @@
     border: 2px solid black;
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
-    background: #324960;
+    background: #d3394c;
     color: white;
     font-size: 18px;
     border-left: none;
     outline: none;
 }
 
-body {
-    text-align: center;
+#cards {
     width: 1080px;
     margin: auto;
-    margin-top: 20px;
+}
+
+body {
+    background-color: #1a2730;
+    text-align: center;
+    margin: auto;
+    padding-top: 60px;
 }
 
 img {
@@ -77,8 +69,14 @@ h1, h2, h3, h4, h5 {
 }
 
 p {
+    text-shadow: 2px 2px black;
+    color: white;
     font-size: 3em;
     padding: 3em;
+}
+
+input:focus::placeholder {
+    color: transparent;
 }
 
 input[type=button] {
@@ -88,26 +86,52 @@ input[type=button] {
     padding: 5px;
     border-radius: 5px;
     border: 2px solid black;
-    background: #324960;
+    background: #d3394c;
     color: white;
     font-size: 17px;
     cursor: pointer;
     outline: none;
 }
 
+.navbar {
+    top: 0;
+    position: fixed;
+    width: 100%;
+    padding: 10px 0;
+    background-color: rgba(6, 10, 12, 0.8);
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.spinner {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 150px;
+    border: 8px solid rgba(0, 0, 0, .2);
+    border-left-color: #d3394c;
+    height: 100px;
+    width: 100px;
+    border-radius: 60%;
+    animation: spin 1s linear infinite;
+}
+
 .card {
     display: inline-block;
     width: 300px;
-    padding: 1em;
+    padding: 10px;
     border-radius: 15px;
     margin: 10px;
     text-align: left;
     box-shadow: 0px 5px 20px -10px #111;
-    position: relative;
+    /*position: relative;*/
     transition: 0.4s;
 }
 
-.card:hover {
+/*.card:hover {
     transform: translateY(-10px);
     transition: 0.4s ease-out;
 }
@@ -116,12 +140,12 @@ input[type=button] {
     position: relative;
     left: 2px;
     transition: 0.4s ease-out;
-}
+}*/
 
 .card__caption {
     background-color: #ffffffa6;
     padding: 1em;
-    position: relative;
+    /*position: relative;*/
     border-radius: 0 0 3px 3px;
 }
 
@@ -151,7 +175,7 @@ input[type=button] {
 
 .card__type {
     display: inline-block;
-    position: relative;
+    /*position: relative;*/
     margin-left: 5px;
     top: 0;
     right: 0;
