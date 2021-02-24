@@ -63,18 +63,18 @@ const get_evolution = (response, name) => {
 const generate_navigation = (body) => {
     switch (current_pokemon_id) {
         case 1:
-            cards_body.innerHTML = `${body}<input type="button"
-            value="Next pokemon" onclick="directed_request(current_pokemon_id + 1)">`;
+            cards_body.innerHTML = `${body}<div id="setaDir"
+            onclick="directed_request(current_pokemon_id + 1)"></div>`;
             break;
         case MAX_POKEMONS:
-            cards_body.innerHTML = `<input type="button"
-            value="Previous pokemon" onclick="directed_request(current_pokemon_id - 1)">${body}`;
+            cards_body.innerHTML = `<div id="setaEsq"
+            onclick="directed_request(current_pokemon_id - 1)"></div>${body}`;
             break;
         default:
-            cards_body.innerHTML = `<input type="button"
-            value="Previous pokemon" onclick="directed_request(current_pokemon_id - 1)">${body}
-            <input type="button" value="Next pokemon"
-            onclick="directed_request(current_pokemon_id + 1)">`;
+            cards_body.innerHTML = `<div id="setaEsq"
+            onclick="directed_request(current_pokemon_id - 1)"></div>${body}
+            <div id="setaDir"
+            onclick="directed_request(current_pokemon_id + 1)"></div>`;
     }
 }
 

@@ -13,6 +13,28 @@
     text-shadow: 2px 2px black;
 }
 
+#setaDir, #setaEsq {
+    position: absolute;
+    cursor: pointer;
+    padding: 30px;
+    box-shadow: 8px -8px 0 1px #d3394c inset;
+    border: solid black;
+    border-width: 0 0 8px 8px;
+}
+
+#setaEsq {
+    margin-left: 300px;
+    margin-top: 250px;
+    transform: rotate(45deg);
+}
+
+#setaDir {
+    top: 60px;
+    margin-top: 250px;
+    margin-left: 710px;
+    transform: rotate(225deg);
+}
+
 #input_data {
     margin-left: 30%;
     border-radius: 43px;
@@ -127,25 +149,12 @@ input[type=button] {
     margin: 10px;
     text-align: left;
     box-shadow: 0px 5px 20px -10px #111;
-    /*position: relative;*/
     transition: 0.4s;
 }
-
-/*.card:hover {
-    transform: translateY(-10px);
-    transition: 0.4s ease-out;
-}
-
-.card:hover ~ .card {
-    position: relative;
-    left: 2px;
-    transition: 0.4s ease-out;
-}*/
 
 .card__caption {
     background-color: #ffffffa6;
     padding: 1em;
-    /*position: relative;*/
     border-radius: 0 0 3px 3px;
 }
 
@@ -175,7 +184,6 @@ input[type=button] {
 
 .card__type {
     display: inline-block;
-    /*position: relative;*/
     margin-left: 5px;
     top: 0;
     right: 0;
