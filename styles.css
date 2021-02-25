@@ -4,39 +4,87 @@
     font-family: 'Open Sans Condensed', sans-serif;
 }
 
+@media screen and (min-width: 1100px) {
+    #cards { 
+        width: 1080px;
+        margin: auto;
+    }
+
+    .navbar {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .navbar h1 {
+        margin-right: 2%;
+    }
+
+    #setaDir, #setaEsq {
+        position: absolute;
+        cursor: pointer;
+        padding: 30px;
+        box-shadow: 8px -8px 0 1px #d3394c inset;
+        border: solid black;
+        border-width: 0 0 8px 8px;
+    }
+
+    #setaEsq {
+        margin-left: 300px;
+        margin-top: 250px;
+        transform: rotate(45deg);
+    }
+    
+    #setaDir {
+        top: 60px;
+        margin-top: 250px;
+        margin-left: 710px;
+        transform: rotate(225deg);
+    }
+}
+
+@media screen and (max-width: 1100px) {
+    #cards {
+        display: inline-block;
+        margin-top: 70px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    #setaEsq, #setaDir {
+        position: absolute;
+        padding: 20px;
+        cursor: pointer;
+        box-shadow: 8px -8px 0 1px #d3394c inset;
+        border: solid black;
+        border-width: 0 0 8px 8px;
+    }
+
+    #setaEsq {
+        margin-top: 250px;
+        transform: rotate(45deg);
+    }
+
+    #setaDir {
+        top: 60px;
+        margin-left: 290px;
+        margin-top: 320px;
+        transform: rotate(225deg);
+    }
+}
+
 @keyframes spin {
-    to { transform: rotate(360deg); }
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 #nav_h1 {
-    color: white;
-    text-shadow: 2px 2px black;
-}
-
-#setaDir, #setaEsq {
-    position: absolute;
-    cursor: pointer;
-    padding: 30px;
-    box-shadow: 8px -8px 0 1px #d3394c inset;
-    border: solid black;
-    border-width: 0 0 8px 8px;
-}
-
-#setaEsq {
-    margin-left: 300px;
-    margin-top: 250px;
-    transform: rotate(45deg);
-}
-
-#setaDir {
-    top: 60px;
-    margin-top: 250px;
-    margin-left: 710px;
-    transform: rotate(225deg);
+    color: #ffffff;
+    text-shadow: 2px 2px #000000;
 }
 
 #input_data {
-    margin-left: 30%;
     border-radius: 43px;
     border-style: solid;
     border-width: 2px;
@@ -51,25 +99,19 @@
 }
 
 #search_button {
-    float: left;
     margin-right: 2%;
     height: 38px;
     width: 70px;
     padding: 5px;
     border-radius: 43px;
-    border: 2px solid black;
+    border: 2px solid #000000;
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
     background: #d3394c;
-    color: white;
+    color: #ffffff;
     font-size: 18px;
     border-left: none;
     outline: none;
-}
-
-#cards {
-    width: 1080px;
-    margin: auto;
 }
 
 body {
@@ -91,7 +133,7 @@ h1, h2, h3, h4, h5 {
 }
 
 p {
-    text-shadow: 2px 2px black;
+    text-shadow: 2px 2px #000000;
     color: white;
     font-size: 3em;
     padding: 3em;
@@ -107,7 +149,7 @@ input[type=button] {
     width: 210px;
     padding: 5px;
     border-radius: 5px;
-    border: 2px solid black;
+    border: 2px solid #000000;
     background: #d3394c;
     color: white;
     font-size: 17px;
@@ -132,7 +174,7 @@ input[type=button] {
 .spinner {
     margin-left: auto;
     margin-right: auto;
-    margin-top: 150px;
+    margin-top: 230px;
     border: 8px solid rgba(0, 0, 0, .2);
     border-left-color: #d3394c;
     height: 100px;
