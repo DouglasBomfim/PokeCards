@@ -29,9 +29,9 @@ async function get_chain(response) {
     return await (fetch(response.species.url, options)
         .then(data => data.json()
             .then(data2 => fetch(data2.evolution_chain.url, options)
-                .then(data => data.json()
-                    .then(data3 => {
-                        return get_evolution(data3, data2.name)
+                .then(data3 => data3.json()
+                    .then(data4 => {
+                        return get_evolution(data4, data2.name)
                     })
                 )
             )

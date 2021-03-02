@@ -1,0 +1,78 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@700&display=swap');
+
+* {
+    font-family: 'Open Sans Condensed', sans-serif;
+}
+
+body {
+    background-color: #1a2730;
+    text-align: center;
+    margin: auto;
+    padding-top: 60px;
+}
+
+img {
+    max-height: 150px;
+    margin: auto;
+    display: inline-block;
+}
+
+h1, h2, h3, h4, h5 {
+    margin: 0;
+    font-weight: 400;
+}
+
+p {
+    text-shadow: 2px 2px #000000;
+    color: white;
+    font-size: 3em;
+    padding: 3em;
+}
+
+input:focus::placeholder {
+    color: transparent;
+}
+
+input[type=button] {
+    width: 40px;
+    height: 36px;
+    width: 210px;
+    padding: 5px;
+    border-radius: 5px;
+    border: 2px solid #000000;
+    background: #d3394c;
+    color: white;
+    font-size: 17px;
+    cursor: pointer;
+    outline: none;
+}
+
+#input_data {
+    border-radius: 43px;
+    border-style: solid;
+    border-width: 2px;
+    text-align: center;
+    width: 180px;
+    font-size: 18px;
+    padding: 5px;
+    border-color: #000000;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    outline: none;
+}
+
+#search_button {
+    margin-right: 2%;
+    height: 38px;
+    width: 70px;
+    padding: 5px;
+    border-radius: 43px;
+    border: 2px solid #000000;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    background: #d3394c;
+    color: #ffffff;
+    font-size: 18px;
+    border-left: none;
+    outline: none;
+}

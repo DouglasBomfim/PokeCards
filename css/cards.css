@@ -1,0 +1,96 @@
+.card {
+    display: inline-block;
+    width: 300px;
+    padding: 10px;
+    border-radius: 15px;
+    margin: 10px;
+    text-align: left;
+    box-shadow: 0px 5px 20px -10px #111;
+    transition: 0.4s;
+}
+
+.card__caption {
+    background-color: #ffffffa6;
+    padding: 1em;
+    border-radius: 0 0 3px 3px;
+}
+
+.card__image-container {
+    background-color: #000000b3;
+    text-align: center;
+    padding: 1em 1em 0;
+    border-radius: 3px 3px 0 0;
+    overflow: hidden;
+}
+
+.card__image-container img {
+    -webkit-transition: -webkit-transform .5s ease;
+    transition: transform .5s ease;
+ }
+ 
+.card__image-container:hover img {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+}
+
+.card__types {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card__type {
+    display: inline-block;
+    margin-left: 5px;
+    top: 0;
+    right: 0;
+    color: #fff;
+    text-shadow: 2px 2px black;
+    letter-spacing: 0.1em;
+    padding: 0.25em;
+    line-height: 1;
+    border-radius: 2px;
+    background: #bbb;
+}
+
+.card__label {
+    font-size: 15px;
+    text-transform: uppercase;
+    font-weight: 400;
+    display: block;
+    margin-bottom: 3px;
+}
+
+.card__name {
+    text-align: center;
+    font-size: 1.5em;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    padding-bottom: 10px;
+}
+
+.card__stats {
+    margin: 1em 0;
+    width: 100%;
+}
+
+.card__stats th {
+    text-align: right;
+    font-weight: 300;
+}
+
+.card__stats th, .card__stats td {
+    width: 50%;
+    padding: 0.25em 0.5em 0;
+}
+
+.card__box {
+    display: flex;
+    justify-content: space-between;
+}
+
+.card__block {
+    margin-top: 1em;
+    text-align: center;
+    flex: 1 0;
+}
