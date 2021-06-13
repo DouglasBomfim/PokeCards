@@ -58,9 +58,10 @@ header {
     list-style: none;
     display: flex;
     align-items: center;
-    li {
-        margin-left: 10px;  
-    }
+}
+
+li {
+    margin-left: 10px;  
 }
 
 .input-li {
