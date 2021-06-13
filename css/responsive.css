@@ -1,17 +1,10 @@
 @media screen and (min-width: 1100px) {
-    #cards { 
+    #cards {
+        margin-top: 50px;
         width: 1080px;
-        margin: auto;
-    }
-
-    .navbar {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .navbar h1 {
-        margin-right: 2%;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
     }
 
     #setaDir, #setaEsq {
@@ -30,10 +23,14 @@
     }
     
     #setaDir {
-        top: 60px;
+        top: 110px;
         margin-top: 250px;
         margin-left: 710px;
         transform: rotate(225deg);
+    }
+
+    p {
+        padding: 3em;
     }
 }
 
@@ -43,6 +40,10 @@
         margin-top: 70px;
         margin-left: auto;
         margin-right: auto;
+    }
+
+    .navigate {
+        text-align: center;
     }
 
     #setaEsq, #setaDir {
@@ -64,5 +65,9 @@
         margin-left: 290px;
         margin-top: 320px;
         transform: rotate(225deg);
+    }
+
+    p {
+        padding: 1em;
     }
 }

@@ -6,9 +6,12 @@
 
 body {
     background-color: #1a2730;
-    text-align: center;
     margin: auto;
     padding-top: 60px;
+}
+
+#cards {
+    text-align: center;
 }
 
 img {
@@ -26,7 +29,6 @@ p {
     text-shadow: 2px 2px #000000;
     color: white;
     font-size: 3em;
-    padding: 3em;
 }
 
 input:focus::placeholder {
@@ -75,4 +77,10 @@ input[type=button] {
     font-size: 18px;
     border-left: none;
     outline: none;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

@@ -1,25 +1,38 @@
 <!DOCTYPE html>
 <html lang="pt-Br">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>PokeCards</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PokeCards</title>
     <link rel="stylesheet" href="./css/cards.css">
     <link rel="stylesheet" href="./css/spinner.css">
     <link rel="stylesheet" href="./css/responsive.css">
-    <link rel="stylesheet" href="./css/navbar.css">
+    <link rel="stylesheet" href="./css/navbar.scss">
     <link rel="stylesheet" href="./css/types.css">
     <link rel="stylesheet" href="./css/styles.css">
 </head>
 <body>
-    <nav class="navbar">    
-        <h1 id="nav_h1">PokeCards</h1>
-        <input type="text" placeholder="Search for a pokémon" id="input_data">
-        <input type="button" id="search_button" value="Search" onclick="search_pokemon()">
-        <input type="button" value="Generate a random pokemon" onclick="random_pokemon()">
-    </nav>
+    <header>
+        <div class="navbar">  
+            <h1 id="nav_h1">PokeCards</h1>
+            <div class="hamburger"></div>
+            <ul class="menu">
+                <li>
+                    <div class="input-li">
+                        <input type="text" placeholder="Search for a pokémon" id="input_data">
+                        <input type="button" id="search_button" value="Search" onclick="search_pokemon()">
+                    </div>
+                </li>
+                <li>            
+                    <input type="button" value="Generate a random pokemon" onclick="random_pokemon()">
+                </li>
+            </ul>
+        </div>
+    </header>
     <div hidden class="spinner"></div>
-    <div id="cards"></div>
+    <div class="navigate">
+        <div id="cards"></div>
+    </div>
     <div class="container" id="view_more"></div>
     <script src="script.js"></script>
     <script>

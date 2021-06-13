@@ -1,6 +1,14 @@
 const cards_body = document.querySelector('#cards');
 const view_more = document.querySelector('#view_more');
 const spinner = document.querySelector('.spinner');
+const hamburger = document.querySelector('.hamburger');
+const menu = document.querySelector('.menu');
+
+hamburger.addEventListener("click", () => {
+    hamburger.classList.toggle('active');
+    menu.classList.toggle('active');
+})
+
 const MAX_POKEMONS = 898;
 let current_pokemon_id;
 let offset = 0;
@@ -157,12 +165,16 @@ function directed_request(field) {
 }
 
 function search_pokemon() {
+    hamburger.classList.toggle('active');
+    menu.classList.toggle('active');
     const search = document.querySelector("#input_data");
     directed_request(search.value.toLowerCase());
     search.value = '';
 }
 
 function random_pokemon() {
+    hamburger.classList.toggle('active');
+    menu.classList.toggle('active');
     const random_number = Math.floor(Math.random() * MAX_POKEMONS) + 1;
     directed_request(random_number);
 }
